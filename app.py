@@ -51,7 +51,11 @@ class customer_verification(Resource):
         args = customer_verification_put_arguments.parse_args()
         if args.customer_id in customers:
             if customers[args.customer_id]["otp"] == args.customer_otp:
-                return {"data" : "You are verified now: " + customers[args.customer_id].customer_first_name + customers[args.customer_id].customer_last_name + "\n Welcome to Our Bank"}
+                print ("You are verified now: " + customers[args.customer_id].customer_first_name + " " + customers[args.customer_id].customer_last_name + "\n Welcome to Our Bank")
+                if customers[args.customer_id]["mobile_number_with_ctry_code"][1] == "1": # US (+1xxxxxxxx)
+                    return {"message": customers[args.customer_id].customer_first_name.upper() + " " + customers[args.customer_id].customer_last_name.upper() + "! You are verified that you are from USA. Please Submit your First Name, Last Name, Father's Name, DOB, Permanent Address, Current Address to the Bank"}
+                elif customers[args.customer_id]["mobile_number_with_ctry_code"][1:3] == "91": # India (+91xxxxxxxxxx)
+                    return {"message": customers[args.customer_id].customer_first_name.upper() + " " + customers[args.customer_id].customer_last_name.upper() + "! You are verified that you are from India. Please Submit your Name, Surname, Family Name, Father's Name, DOB, Permanent Address,Current Address to the Bank"}
             else:
                 return {"data" : "Invalid OTP","status":401}
         else:
