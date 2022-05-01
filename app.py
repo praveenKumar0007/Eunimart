@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_restful import Api, Resource, reqparse, abort
+from flask_restful import Api, Resource, reqparse
 
 import os
 from dotenv import load_dotenv
@@ -31,7 +31,7 @@ class customer_login(Resource): # customer_login class will Inherit from Resourc
         otp = random.randint(1000,9999)
         client = Client(account_sid, auth_token)
         message = client.messages.create(
-                body='Hello ' + args.customer_first_name + ' ' + args.customer_last_name + '\n' + 'Your OTP is ' + str(otp) +'\n' + 'Your Customer ID is ' + str(random_customer_id),
+                body='Hello ' + args.customer_first_name + ' ' + args.customer_last_name + '\nYour OTP is ' + str(otp) +'\nYour Customer ID is ' + str(random_customer_id),
                 from_=my_number,
                 to=args.mobile_number_with_ctry_code
             )
