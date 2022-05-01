@@ -38,8 +38,7 @@ class customer_login(Resource): # customer_login class will Inherit from Resourc
         customers[random_customer_id] = args
         customers[random_customer_id]["otp"] = otp
         customers[random_customer_id]["customer_id"] = random_customer_id
-        print(customers)
-        return {"Login": args,"customer_id":random_customer_id, "status":200}
+        return {"customer_id":random_customer_id, "message":"OTP has been sent to your mobile", "status":200}
 api.add_resource(customer_login,"/customer_login") # Register customer_login as a resource.. the "/" is the default/home URL
 
 customer_verification_put_arguments = reqparse.RequestParser()
